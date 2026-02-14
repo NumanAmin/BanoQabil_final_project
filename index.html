@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouman Electric Store</title>
+    
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1f3c88;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #f7f8fa;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    background: #1f3c88;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+nav a:hover {
+    background: #163172;
+}
+
+.container {
+    padding: 15px;
+}
+
+.section {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.card {
+    background: white;
+    padding:  15px;
+    margin: 15px auto;
+    max-width: 950px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.welcome {
+    background: linear-gradient(to right, #1f3c88, #3f72af);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+table, th, td {
+    border: 1px solid #aaa;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #3f72af;
+    color: white;
+}
+
+.product-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.invoice-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.total-box {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.print-btn {
+    background-color: #008000;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.print-btn:hover {
+    background-color: #006400;
+}
+
+footer {
+    background-color: #1f3c88;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    max-width: 250px;
+    padding: 8px;
+    margin: 6px 4px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.success-msg {
+    font-weight: bold;
+    color: green;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .product-img {
+        width: 60px;
+        height: 45px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .welcome {
+        padding: 20px 10px;
+    }
+
+    .print-btn {
+        font-size: 14px;
+    }
+}
+
+    .products-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    /* Tablet view */
+    @media (max-width: 900px) {
+        .products-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* Mobile view */
+    @media (max-width: 600px) {
+        .products-container {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .card1 img {
+            height: 50px;
+            width: 50px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+    
+    .card1 {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        padding:  15px;
+        margin: 15px auto;
+        max-width: 950px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    
+    }
+
+    .card1:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .card1 img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-content h3 {
+        margin: 10px 0 8px;
+        font-size: 18px;
+        color: #222;
+    }
+
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #28a745;
+    }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Unique Electric Store</h1>     
+    <p>Your one-stop all electrical appliances</p>
+</header>
+
+<nav>
+    <a onclick="showSection('welcome')">Welcome</a>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('item')">Item List</a>
+    <a onclick="showSection('products')">Customer Card</a>
+    <a onclick="showSection('invoice')">Invoice</a>
+</nav>
+
+<div class="container">
+
+    <!-- Welcome Section -->
+    <div id="welcome" class="section active">
+        <div class="card welcome">
+            <h2>Welcome to Unique Electric Store</h2>
+            <p>We offer high-quality electrical appliances at affordable prices.</p>
+            <p>Click on Products to start shopping!</p>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <div id="home" class="section">
+        <div class="card">
+            <h2>About Our Shop</h2>
+            <p>Unique Electric Store provides reliable electrical appliances for homes and businesses.</p>
+        </div>
+
+        <div class="card">
+            <h2>Owner</h2>
+            <p>Muhammad Nouman</p>
+        </div>
+
+        <div class="card">
+            <h2>Working Hours</h2>
+            <p>Monday to Saturday: 9:00 AM – 10:00 PM</p>
+            <p>Sunday: Closed</p>
+        </div>
+    </div>
+    <!--Item List-->
+    <div id="item" class="section">
+        <div class="products-container">
+        <!-- Card 1 -->
+        <div class="card1">
+            <img src="https://images.squarespace-cdn.com/content/v1/5b180a6a45776e968b1ec79b/8ee5d651-3e74-485c-8925-b99961739153/recessed+light.png" alt="LED Light" class="pic">
+            <div class="card-content">
+                <h3>LED Light</h3>
+                <p class="price">Rs. 800</p>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card1">
+            <img src="data:image/webp;base64,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" alt="Product 2">
+            <div class="card-content">
+                <h3>Ceiling Fan</h3>
+                <p class="price">Rs. 12,000</p>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card1">
+            <img src="https://cdn.mos.cms.futurecdn.net/YjL2MfT8pFPyLKcMY8dqwH-1200-80.jpg" alt="Product 3">
+            <div class="card-content">
+                <h3>Refrigerator </h3>
+                <p class="price">Rs. 1,00,000</p>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card1">
+            <img src="https://img.staticmb.com/mbcontent/images/uploads/2023/3/Split-air-conditioner.jpg" alt="Product 4">
+            <div class="card-content">
+                <h3>Air Conditioner</h3>
+                <p class="price">Rs. 85,000</p>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card1">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.iFc6ryJIxRVYbWGou78XCgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Product 5">
+            <div class="card-content">
+                <h3>Washing Machine</h3>
+                <p class="price">Rs. 50,000</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Products Section -->
+    <div id="products" class="section">
+        <div class="card">
+            <h2>Customer Details</h2>
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <input type="text" id="customerPhone" placeholder="Phone Number">
+        </div>
+
+        <div class="card">
+            <h2>Available Products</h2>
+
+            <table>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price (Rs)</th>
+                    <th>Qty</th>
+                    <th>Add</th>
+                </tr>
+
+                <tr>
+                    <td><img src="https://images.squarespace-cdn.com/content/v1/5b180a6a45776e968b1ec79b/8ee5d651-3e74-485c-8925-b99961739153/recessed+light.png" class="product-img" alt="LED Light"></td>
+                    <td>LED Light</td>
+                    <td>800</td>
+                    <td><input type="number" id="qtyLight" min="1"></td>
+                    <td><button onclick="addToBill('LED Light', 800, 'qtyLight')">Add</button></td>
+                </tr>
+
+                <tr>
+                    <td><img src="data:image/webp;base64,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" class="product-img" alt="Fan"></td>
+                    <td>Ceiling Fan</td>
+                    <td>12000</td>
+                    <td><input type="number" id="qtyFan" min="1"></td>
+                    <td><button onclick="addToBill('Ceiling Fan', 12000, 'qtyFan')">Add</button></td>
+                </tr>
+
+                <tr>
+                    <td><img src="https://cdn.mos.cms.futurecdn.net/YjL2MfT8pFPyLKcMY8dqwH-1200-80.jpg" alt="Refrigerator" class="product-img"></td>
+                    <td>Refrigerator</td>
+                    <td>1,00,000</td>
+                    <td><input type="number" id="qtyFridge" min="1"></td>
+                    <td><button onclick="addToBill('Refrigerator', 85000, 'qtyFridge')">Add</button></td>
+                </tr>
+
+                <tr>
+                    <td><img src="https://img.staticmb.com/mbcontent/images/uploads/2023/3/Split-air-conditioner.jpg" class="product-img" alt="AC"></td>
+                    <td>Air Conditioner</td>
+                    <td>85,000</td>
+                    <td><input type="number" id="qtyAC" min="1"></td>
+                    <td><button onclick="addToBill('Air Conditioner', 150000, 'qtyAC')">Add</button></td>
+                </tr>
+
+                <tr>
+                    <td><img src="https://tse3.mm.bing.net/th/id/OIP.iFc6ryJIxRVYbWGou78XCgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" class="product-img" alt="Washing Machine"></td>
+                    <td>Washing Machine</td>
+                    <td>50,000</td>
+                    <td><input type="number" id="qtyWashing" min="1"></td>
+                    <td><button onclick="addToBill('Washing Machine', 65000, 'qtyWashing')">Add</button></td>
+                </tr>
+            </table>
+
+            <p id="cartMessage" class="success-msg"></p>
+        </div>
+    </div>
+
+    <!-- Invoice Section -->
+    <div id="invoice" class="section">
+        <div class="card invoice-box">
+            <h2 style="text-align:center;">Complete Invoice</h2>
+
+            <p><strong>Customer Name:</strong> <span id="invCustomerName">---</span></p>
+            <p><strong>Phone:</strong> <span id="invCustomerPhone">---</span></p>
+
+            <table id="invoiceTable">
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Price (Rs)</th>
+                    <th>Qty</th>
+                    <th>Total (Rs)</th>
+                </tr>
+            </table>
+
+            <div class="total-box">
+                Grand Total: Rs. <span id="grandTotal">0</span>
+            </div>
+
+            <button class="print-btn" onclick="window.print()">Print Invoice</button>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Unique Electric Store. All Rights Reserved.</p>
+</footer>
+
+<script>
+    let cart = [];
+let totalAmount = 0;
+
+// Show selected section
+function showSection(sectionId) {
+    let sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+}
+
+// Add product to bill
+function addToBill(productName, price, qtyInputId) {
+    let qty = document.getElementById(qtyInputId).value;
+
+    if (qty === "" || qty <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    let itemTotal = price * qty;
+
+    cart.push({
+        name: productName,
+        price: price,
+        quantity: qty,
+        total: itemTotal
+    });
+
+    totalAmount += itemTotal;
+
+    document.getElementById("cartMessage").innerText =
+        productName + " added to bill successfully.";
+
+    updateInvoice();
+}
+
+// Update invoice table and totals
+function updateInvoice() {
+    let table = document.getElementById("invoiceTable");
+
+    // Clear previous rows except header
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
+    cart.forEach((item, index) => {
+        let row = table.insertRow();
+        row.insertCell(0).innerText = index + 1;
+        row.insertCell(1).innerText = item.name;
+        row.insertCell(2).innerText = item.price;
+        row.insertCell(3).innerText = item.quantity;
+        row.insertCell(4).innerText = item.total;
+    });
+
+    document.getElementById("grandTotal").innerText = totalAmount;
+
+    document.getElementById("invCustomerName").innerText =
+        document.getElementById("customerName").value || "---";
+
+    document.getElementById("invCustomerPhone").innerText =
+        document.getElementById("customerPhone").value || "---";
+}
+
+</script>
+</body>
+</html>
